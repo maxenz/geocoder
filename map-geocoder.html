@@ -5,7 +5,6 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>HTML5 Structure</title>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	    <style>
 	      html, body {
 	        height: 100%;
@@ -84,7 +83,6 @@
 
 				// --> Listener de click en mapa. Agrego marcador y borro los demás
 				map.addListener('click', function(event) {
-				 	setMapOnAll(null);
     				addMarker(event.latLng);
   				});
 
@@ -102,6 +100,9 @@
 			 * @param {Object} latlng 
 			 */
 			function addMarker(location) {
+
+			    setMapOnAll(null);
+			    markers = [];
 			  	var marker = new google.maps.Marker({
 			    	position: location,
 			    	map: map
@@ -167,7 +168,10 @@
 				controlUI.addEventListener('click', function() {
 					if (markers.length > 0) {
 						var selectedLatitude = markers[0].position.lat();
-						var selectedLongitude = markers[1].position.lng();
+						var selectedLongitude = markers[0].position.lng();
+						// --> La info de la posicion se la seteo al title de la pagina.
+						// --> Esta negrada me la pidio javier nigrelli, queda el lector notificado.
+						document.title = "latitude=" + selectedLatitude + "&longitude=" + selectedLongitude;
 					}					
 				});
 
